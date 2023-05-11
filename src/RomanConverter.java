@@ -80,10 +80,10 @@ public class RomanConverter {
                 romanToArabic(inputNum2);
                 return true;
             } catch (IllegalArgumentException ex) {
-                throw new IOException("цифры не римские или арабские!");
+                throw new IOException("Цифры не римские или арабские!");
             }
         }
-        throw new IOException("цифры в разных форматах!");
+        throw new IOException("Цифры в неправильных форматах!");
     }
 
     private static boolean isNumeric(String str) {

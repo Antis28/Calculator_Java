@@ -20,7 +20,7 @@ class CalculatorTest {
         String num1 = "V";
         String num2 = "1";
         String mod = "+";
-        String expected = "цифры в разных форматах!";
+        String expected = "Цифры в неправильных форматах!";
 
         Exception exception = assertThrows(java.io.IOException.class, () ->
                 Calculator.calculateInFormat(mod, num1, num2));
@@ -38,7 +38,7 @@ class CalculatorTest {
         String num1 = "j";
         String num2 = "V";
         String mod = "+";
-        String expected = "цифры не римские или арабские!";
+        String expected = "Цифры не римские или арабские!";
 
         Exception exception = assertThrows(java.io.IOException.class, () ->
                 Calculator.calculateInFormat(mod, num1, num2));
@@ -79,7 +79,7 @@ class CalculatorTest {
         String num3 = "1";
         String num4 = "4.4";
         String mod = "+";
-        String expected = "Одно из чисел больше 10!";
+        String expected = "Цифры в неправильных форматах!";
 
         Exception exceptionArabic = assertThrows(java.io.IOException.class, () ->
                 Calculator.calculateInFormat(mod, num1, num2));
