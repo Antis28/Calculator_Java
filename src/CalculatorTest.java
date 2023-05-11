@@ -169,11 +169,22 @@ class CalculatorTest {
     @Test
     @DisplayName("Арабские числа могут быть отрицательные.")
     void givenArabicNum_ThenReturnIntegerLessZero() throws IOException {
-
         String num1 = "1";
         String num2 = "2";
         String mod = "-";
         int expected = -1;
+
+        assertEquals(expected, Calculator.calculateInTwoFormat(mod, num1, num2));
+    }
+
+    @Test
+    @DisplayName("Арабские числа могут быть нулем.")
+    void givenArabicNum_ThenReturnZero() throws IOException {
+
+        String num1 = "1";
+        String num2 = "1";
+        String mod = "-";
+        int expected = 0;
 
         assertEquals(expected, Calculator.calculateInTwoFormat(mod, num1, num2));
 
