@@ -25,9 +25,9 @@ class CalculatorTest {
         String expected = "Цифры в неправильных форматах!";
 
         Exception exception = assertThrows(java.io.IOException.class, () ->
-                Calculator.calculateInFormat(mod, num1, num2));
+                Calculator.calculateInTwoFormat(mod, num1, num2));
         Exception exceptionInvert = assertThrows(java.io.IOException.class, () ->
-                Calculator.calculateInFormat(mod, num2, num1));
+                Calculator.calculateInTwoFormat(mod, num2, num1));
         assertAll(
                 () -> assertEquals(expected, exception.getMessage()),
                 () -> assertEquals(expected, exceptionInvert.getMessage())
@@ -44,9 +44,9 @@ class CalculatorTest {
         String expected = "Цифры не римские или арабские!";
 
         Exception exception = assertThrows(java.io.IOException.class, () ->
-                Calculator.calculateInFormat(mod, num1, num2));
+                Calculator.calculateInTwoFormat(mod, num1, num2));
         Exception exceptionInvert = assertThrows(java.io.IOException.class, () ->
-                Calculator.calculateInFormat(mod, num2, num1));
+                Calculator.calculateInTwoFormat(mod, num2, num1));
         assertAll(
                 () -> assertEquals(expected, exception.getMessage()),
                 () -> assertEquals(expected, exceptionInvert.getMessage())
@@ -65,9 +65,9 @@ class CalculatorTest {
         String expected = "Одно из чисел больше 10!";
 
         Exception exceptionArabic = assertThrows(java.io.IOException.class, () ->
-                Calculator.calculateInFormat(mod, num1, num2));
+                Calculator.calculateInTwoFormat(mod, num1, num2));
         Exception exceptionRoman = assertThrows(java.io.IOException.class, () ->
-                Calculator.calculateInFormat(mod, num3, num4));
+                Calculator.calculateInTwoFormat(mod, num3, num4));
 
         assertAll(
                 () -> assertEquals(expected, exceptionArabic.getMessage()),
@@ -87,9 +87,9 @@ class CalculatorTest {
         String expected = "Цифры в неправильных форматах!";
 
         Exception exceptionArabic = assertThrows(java.io.IOException.class, () ->
-                Calculator.calculateInFormat(mod, num1, num2));
+                Calculator.calculateInTwoFormat(mod, num1, num2));
         Exception exceptionRoman = assertThrows(java.io.IOException.class, () ->
-                Calculator.calculateInFormat(mod, num3, num4));
+                Calculator.calculateInTwoFormat(mod, num3, num4));
 
         assertAll(
                 () -> assertEquals(expected, exceptionArabic.getMessage()),
@@ -106,7 +106,31 @@ class CalculatorTest {
         String mod = "/";
         int expected = 1;
 
-        assertEquals(expected, Calculator.calculateInFormat(mod, num1, num2));
+        assertEquals(expected, Calculator.calculateInTwoFormat(mod, num1, num2));
+
+    }
+
+    @Test
+    @DisplayName("Все операции правильные.")
+    void givenValidOperation_WhenCalculate_ThenReturnInteger1() throws IOException {
+
+        String num1 = "10";
+        String num2 = "2";
+        String mod1 = "/";
+        String mod2 = "+";
+        String mod3 = "-";
+        String mod4 = "*";
+        int expected1 = 5;
+        int expected2 = 12;
+        int expected3 = 8;
+        int expected4 = 20;
+
+        assertAll(
+                () -> assertEquals(expected1, Calculator.calculateInTwoFormat(mod1, num1, num2)),
+                () -> assertEquals(expected2, Calculator.calculateInTwoFormat(mod2, num1, num2)),
+                () -> assertEquals(expected3, Calculator.calculateInTwoFormat(mod3, num1, num2)),
+                () -> assertEquals(expected4, Calculator.calculateInTwoFormat(mod4, num1, num2))
+        );
 
     }
 }

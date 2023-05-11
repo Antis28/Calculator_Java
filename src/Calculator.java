@@ -31,7 +31,8 @@ import java.io.IOException;
 
 
 public class Calculator {
-    public static int calculateInFormat(String mod, String inputNum1, String inputNum2) throws IOException {
+    // Калькулятор для 2-х форматов
+    public static int calculateInTwoFormat(String mod, String inputNum1, String inputNum2) throws IOException {
 
         // Определяем формат арабский или римский
         boolean isRoman = RomanConverter.isRomanFormat(inputNum1, inputNum2);
@@ -43,12 +44,13 @@ public class Calculator {
         if (num1> 10 || num2 > 10)
             throw new IOException("Одно из чисел больше 10!");
 
-        int answer = calculate(mod, num1, num2);
+        int answer = calculateArabic(mod, num1, num2);
         if (answer < 0 && isRoman)
             throw new IOException("Римское число меньше 1!");
         return answer;
     }
-    public static int calculate(String mod, int inputNum1, int inputNum2) {
+    // Калькулятор только для арабских цифр
+    public static int calculateArabic(String mod, int inputNum1, int inputNum2) {
         return switch (mod) {
             case "+" -> inputNum1 + inputNum2;
             case "-" -> inputNum1 - inputNum2;

@@ -21,7 +21,7 @@ public class Main {
             fullString = inputNum1 + mod + inputNum2;
             System.out.println("Вы ввели - " + fullString);
 
-            int answer = Calculator.calculateInFormat(mod, inputNum1, inputNum2);
+            int answer = Calculator.calculateInTwoFormat(mod, inputNum1, inputNum2);
 
             //Печатаем в нужном формате
             printInFormat(answer, isRoman);
