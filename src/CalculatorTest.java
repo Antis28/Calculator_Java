@@ -16,6 +16,24 @@ class CalculatorTest {
     }
 
     @Test
+    @DisplayName("Одно из чисел пустая строка.")
+    void givenSpaceString_WhenCheckRoman_ThenReturnFalse() {
+        String roman15 = "XV";
+        String spaceString = "";
+        String expected = "Цифры не римские или арабские!";
+
+        Exception exception = assertThrows(java.io.IOException.class, () ->
+                RomanConverter.isRomanFormat(spaceString, roman15));
+        Exception exceptionInvert = assertThrows(java.io.IOException.class, () ->
+                RomanConverter.isRomanFormat(roman15, spaceString));
+
+        assertAll(
+                () -> assertEquals(expected, exception.getMessage()),
+                () -> assertEquals(expected, exceptionInvert.getMessage())
+        );
+    }
+
+    @Test
     @DisplayName("Если разные форматы, то исключение")
     void givenDifferentFormatNumber_WhenCalculate_ThenThrowException() {
 
@@ -42,14 +60,21 @@ class CalculatorTest {
         String num2 = "V";
         String mod = "+";
         String expected = "Цифры не римские или арабские!";
+        String expectedSpace = "Не введены все числа или знак.";
 
         Exception exception = assertThrows(java.io.IOException.class, () ->
                 Calculator.calculateInTwoFormat(mod, num1, num2));
         Exception exceptionInvert = assertThrows(java.io.IOException.class, () ->
                 Calculator.calculateInTwoFormat(mod, num2, num1));
+        Exception exceptionSpace1 = assertThrows(java.io.IOException.class, () ->
+                Calculator.calculateInTwoFormat(mod, num2, ""));
+        Exception exceptionSpace2 = assertThrows(java.io.IOException.class, () ->
+                Calculator.calculateInTwoFormat(mod, "", num2));
         assertAll(
                 () -> assertEquals(expected, exception.getMessage()),
-                () -> assertEquals(expected, exceptionInvert.getMessage())
+                () -> assertEquals(expected, exceptionInvert.getMessage()),
+                () -> assertEquals(expectedSpace, exceptionSpace1.getMessage()),
+                () -> assertEquals(expectedSpace, exceptionSpace2.getMessage())
         );
     }
 
@@ -166,6 +191,7 @@ class CalculatorTest {
                 () -> assertEquals(expected4, exception4.getMessage())
         );
     }
+
     @Test
     @DisplayName("Арабские числа могут быть отрицательные.")
     void givenArabicNum_ThenReturnIntegerLessZero() throws IOException {
@@ -190,4 +216,18 @@ class CalculatorTest {
 
     }
 
+    @Test
+    @DisplayName("Римские числа не могут быть отрицательные.")
+    void givenRomanNumReturnLessZero_ThenException() {
+
+        String num1 = "I";
+        String num2 = "II";
+        String mod = "-";
+        String expected = "Римское число меньше 1!";
+        Exception exception = assertThrows(java.io.IOException.class, () ->
+                Calculator.calculateInTwoFormat(mod, num1, num2));
+
+        assertEquals(expected, exception.getMessage());
+
+    }
 }

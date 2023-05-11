@@ -22,17 +22,22 @@
 //
 //      +  Результатом операции деления является целое число, остаток отбрасывается.
 //
-//        Результатом работы калькулятора с арабскими числами могут быть отрицательные числа и ноль.
+//      +  Результатом работы калькулятора с арабскими числами могут быть отрицательные числа и ноль.
 //
-//        Результатом работы калькулятора с римскими числами могут быть только положительные числа,
+//      +  Результатом работы калькулятора с римскими числами могут быть только положительные числа,
 //        если результат работы меньше единицы, выбрасывается исключение
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class Calculator {
     // Калькулятор для 2-х форматов
     public static int calculateInTwoFormat(String mod, String inputNum1, String inputNum2) throws IOException {
+
+        if (Objects.equals(mod, "") || Objects.equals(inputNum1, "") || Objects.equals(inputNum2, "")){
+            throw new IOException("Не введены все числа или знак.");
+        }
 
         // Определяем формат арабский или римский
         boolean isRoman = RomanConverter.isRomanFormat(inputNum1, inputNum2);

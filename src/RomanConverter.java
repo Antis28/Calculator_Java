@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 public class RomanConverter {
     // из римских чисел в арабские
     public static int romanToArabic(String input) {
+        if (input.length() == 0) {
+            throw new IllegalArgumentException("Получена пустая строка!");
+        }
         String romanNumeral = input.toUpperCase();
         int result = 0;
 
