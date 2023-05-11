@@ -72,14 +72,14 @@ public class RomanConverter {
         // Все арабские числа?
         if (allNumeric) {
             return false;
-            // Все не арабские числа?
+            // Числа не арабские, а римские ли?
         } else if (allRoman) {
             // Можно ли римские цифры преобразовать в арабсие?
-            boolean isRoman = isNumeric(String.valueOf(romanToArabic(inputNum1)))
-                    && isNumeric(String.valueOf(romanToArabic(inputNum2)));
-            if (isRoman) {
+            try {
+                romanToArabic(inputNum1);
+                romanToArabic(inputNum2);
                 return true;
-            } else {
+            } catch (IllegalArgumentException ex) {
                 throw new IOException("цифры не римские или арабские!");
             }
         }
