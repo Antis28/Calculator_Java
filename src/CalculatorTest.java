@@ -112,7 +112,7 @@ class CalculatorTest {
 
     @Test
     @DisplayName("Все операции правильные.")
-    void givenValidOperation_WhenCalculate_ThenReturnInteger1() throws IOException {
+    void givenValidOperation_WhenCalculate_ThenReturnInteger1() {
 
         String num1 = "10";
         String num2 = "2";
@@ -133,4 +133,38 @@ class CalculatorTest {
         );
 
     }
+
+    @Test
+    @DisplayName("Все операции неправильные.")
+    void givenNotValidOperation_WhenCalculate_ThenReturnInteger1() {
+
+        String num1 = "10";
+        String num2 = "2";
+        String mod1 = "%";
+        String mod2 = "^";
+        String mod3 = ":";
+        String mod4 = "&";
+        String expected1 = mod1 + " - формат операции не верен!";
+        String expected2 = mod2 + " - формат операции не верен!";
+        String expected3 = mod3 + " - формат операции не верен!";
+        String expected4 = mod4 + " - формат операции не верен!";
+
+
+        Exception exception1 = assertThrows(java.lang.IllegalArgumentException.class, () ->
+                Calculator.calculateInTwoFormat(mod1, num1, num2));
+        Exception exception2 = assertThrows(java.lang.IllegalArgumentException.class, () ->
+                Calculator.calculateInTwoFormat(mod2, num1, num2));
+        Exception exception3 = assertThrows(java.lang.IllegalArgumentException.class, () ->
+                Calculator.calculateInTwoFormat(mod3, num1, num2));
+        Exception exception4 = assertThrows(java.lang.IllegalArgumentException.class, () ->
+                Calculator.calculateInTwoFormat(mod4, num1, num2));
+
+        assertAll(
+                () -> assertEquals(expected1, exception1.getMessage()),
+                () -> assertEquals(expected2, exception2.getMessage()),
+                () -> assertEquals(expected3, exception3.getMessage()),
+                () -> assertEquals(expected4, exception4.getMessage())
+        );
+    }
+
 }
