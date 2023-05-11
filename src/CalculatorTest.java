@@ -1,12 +1,14 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
     @Test
     @DisplayName("Из римской XV в арабскую 15.")
-    void given1999Arabic_WhenConvertingToRoman_ThenReturnMCMXCIX() {
+    void given15Arabic_WhenConvertingToRoman_ThenReturnXV() {
         String roman15 = "XV";
         int result = RomanConverter.romanToArabic(roman15);
 
@@ -31,6 +33,7 @@ class CalculatorTest {
                 () -> assertEquals(expected, exceptionInvert.getMessage())
         );
     }
+
     @Test
     @DisplayName("Если одно из чисел не число, то исключение")
     void givenNotNumber_WhenCalculate_ThenThrowException() {
@@ -49,6 +52,7 @@ class CalculatorTest {
                 () -> assertEquals(expected, exceptionInvert.getMessage())
         );
     }
+
     @Test
     @DisplayName("Переданные числа больше 10")
     void givenNumberBigest10_WhenCalculate_ThenThrowException() {
@@ -70,6 +74,7 @@ class CalculatorTest {
                 () -> assertEquals(expected, exceptionRoman.getMessage())
         );
     }
+
     @Test
     @DisplayName("Переданные числа десятичные")
     void givenNumberFloat_WhenCalculate_ThenThrowException() {
@@ -90,5 +95,18 @@ class CalculatorTest {
                 () -> assertEquals(expected, exceptionArabic.getMessage()),
                 () -> assertEquals(expected, exceptionRoman.getMessage())
         );
+    }
+
+    @Test
+    @DisplayName("При делении результат целое число")
+    void given3Div2_WhenCalculate_ThenReturnInteger1() throws IOException {
+
+        String num1 = "3";
+        String num2 = "2";
+        String mod = "/";
+        int expected = 1;
+
+        assertEquals(expected, Calculator.calculateInFormat(mod, num1, num2));
+
     }
 }
