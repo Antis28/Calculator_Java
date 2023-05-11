@@ -3,13 +3,13 @@
 //        a + b, a - b, a * b, a / b. Данные передаются в одну строку (смотри пример)!
 //        Решения, в которых каждое число и арифмитеческая операция передаются с новой строки считаются неверными.
 //
-//        Калькулятор умеет работать как с арабскими (1,2,3,4,5…), так и с римскими (I,II,III,IV,V…) числами.
+//      +  Калькулятор умеет работать как с арабскими (1,2,3,4,5…), так и с римскими (I,II,III,IV,V…) числами.
 //
-//        Калькулятор должен принимать на вход числа от 1 до 10 включительно, не более.
+//      +  Калькулятор должен принимать на вход числа от 1 до 10 включительно, не более.
 //        На выходе числа не ограничиваются по величине и могут быть любыми.
 //
-//        Калькулятор умеет работать только с целыми числами.
-//        Калькулятор умеет работать только с арабскими или римскими цифрами одновременно,
+//      +  Калькулятор умеет работать только с целыми числами.
+//      +  Калькулятор умеет работать только с арабскими или римскими цифрами одновременно,
 //        при вводе пользователем строки вроде 3 + II калькулятор должен выбросить исключение и прекратить свою работу.
 //
 //        При вводе римских чисел, ответ должен быть выведен римскими цифрами, соответственно,
@@ -32,6 +32,7 @@ import java.io.IOException;
 
 public class Calculator {
     public static int calculateInFormat(String mod, String inputNum1, String inputNum2) throws IOException {
+
         // Определяем формат арабский или римский
         boolean isRoman = RomanConverter.isRomanFormat(inputNum1, inputNum2);
 
@@ -39,7 +40,13 @@ public class Calculator {
         int num1 = RomanConverter.normalizeNumber(inputNum1, isRoman);
         int num2 = RomanConverter.normalizeNumber(inputNum2, isRoman);
 
-        return calculate(mod, num1, num2);
+        if (num1> 10 || num2 > 10)
+            throw new IOException("Одно из чисел больше 10!");
+
+        int answer = calculate(mod, num1, num2);
+        if (answer < 0 && isRoman)
+            throw new IOException("Римское число меньше 1!");
+        return answer;
     }
     public static int calculate(String mod, int inputNum1, int inputNum2) {
         return switch (mod) {
