@@ -1,49 +1,38 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         // Получаем числа
         Scanner in = new Scanner(System.in);
         System.out.println("Введите пример для решения римскими или арабскими числами в формате 1 + 1: ");
 
-        try {
-            String input = in.nextLine();
-            String[] strings = input.split(" ");
-            String inputNum1, mod, inputNum2;
+        String input = in.nextLine();
 
-            if (strings.length == 3) {
-                inputNum1 = strings[0];
-                mod = strings[1];
-                inputNum2 = strings[2];
-            }else {
-                throw new IllegalArgumentException("Неверный формат ввода");
-            }
-
-
-            // Определяем формат арабский или римский
-            boolean isRoman = RomanConverter.isRomanFormat(inputNum1, inputNum2);
-            int answer = Calculator.calculateInTwoFormat(mod, inputNum1, inputNum2);
-
-            //Печатаем в нужном формате
-            printInFormat(answer, isRoman);
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-
-        }
+        String answer = calc(input);
+        System.out.println(answer);
     }
 
-    private static void printInFormat(int num, boolean isRomanFormat) {
-        String output;
-        if (isRomanFormat) {
-            output = RomanConverter.arabicToRoman(num);
+    public static String calc(String input) throws IOException {
+        String[] strings = input.split(" ");
+        String leftOperator, sign, rightOperator;
+
+        if (strings.length == 3) {
+            leftOperator = strings[0];
+            sign = strings[1];
+            rightOperator = strings[2];
         } else {
-            output = String.valueOf(num);
+            throw new IllegalArgumentException("Неверный формат ввода");
         }
-        System.out.println(output);
+        // Определяем формат арабский или римский
+        boolean isRoman = RomanConverter.isRomanFormat(leftOperator, rightOperator);
+        int answer = Calculator.calculateInTwoFormat(sign, leftOperator, rightOperator);
+
+        if (isRoman) {
+            return RomanConverter.arabicToRoman(answer);
+        }
+        return String.valueOf(answer);
     }
-
-
 }

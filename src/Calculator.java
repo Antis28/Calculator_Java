@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 
-public class Calculator {
+class Calculator {
     // Калькулятор для 2-х форматов
     public static int calculateInTwoFormat(String mod, String inputNum1, String inputNum2) throws IOException {
 
