@@ -35,7 +35,7 @@ public class Calculator {
     // Калькулятор для 2-х форматов
     public static int calculateInTwoFormat(String mod, String inputNum1, String inputNum2) throws IOException {
 
-        if (Objects.equals(mod, "") || Objects.equals(inputNum1, "") || Objects.equals(inputNum2, "")){
+        if (Objects.equals(mod, "") || Objects.equals(inputNum1, "") || Objects.equals(inputNum2, "")) {
             throw new IOException("Не введены все числа или знак.");
         }
 
@@ -46,7 +46,7 @@ public class Calculator {
         int num1 = RomanConverter.normalizeNumber(inputNum1, isRoman);
         int num2 = RomanConverter.normalizeNumber(inputNum2, isRoman);
 
-        if (num1> 10 || num2 > 10)
+        if (num1 > 10 || num2 > 10)
             throw new IOException("Одно из чисел больше 10!");
 
         int answer = calculateArabic(mod, num1, num2);
@@ -54,6 +54,7 @@ public class Calculator {
             throw new IOException("Римское число меньше 1!");
         return answer;
     }
+
     // Калькулятор только для арабских цифр
     public static int calculateArabic(String mod, int inputNum1, int inputNum2) {
         return switch (mod) {
