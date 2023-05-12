@@ -230,4 +230,18 @@ class CalculatorTest {
         assertEquals(expected, exception.getMessage());
 
     }
+    @Test
+    @DisplayName("Римские числа не могут быть отрицательные.")
+    void givenOperatorMoreThanTwo_ThenException() {
+
+        String num1 = "I";
+        String num2 = "II";
+        String mod = "-";
+        String expected = "Римское число меньше 1!";
+        Exception exception = assertThrows(java.io.IOException.class, () ->
+                Calculator.calculateInTwoFormat(mod, num1, num2));
+
+        assertEquals(expected, exception.getMessage());
+
+    }
 }
