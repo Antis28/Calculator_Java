@@ -1,15 +1,14 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         System.out.println("Hello and welcome!");
 
         // Получаем числа
         Scanner in = new Scanner(System.in);
         System.out.println("Введите пример для решения римскими или арабскими числами: ");
-        String fullString = "";
+        String fullString;
 
         try {
             String inputNum1 = in.next();
@@ -26,7 +25,7 @@ public class Main {
             fullString = inputNum1 + mod + inputNum2;
             System.out.println("Вы ввели - " + fullString);
 
-            int answer = 0;
+            int answer;
 
             answer = Calculator.calculateInTwoFormat(mod, inputNum1, inputNum2);
             //Печатаем в нужном формате
