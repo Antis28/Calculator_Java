@@ -9,9 +9,14 @@ public class Main {
         // Получаем числа
         Scanner in = new Scanner(System.in);
         System.out.println("Введите пример для решения римскими или арабскими числами: ");
-        String fullString;
-        do {
+        String fullString = "";
+
+        try {
             String inputNum1 = in.next();
+            if (inputNum1.equals("exit")) {
+                System.out.println("exit");
+            }
+
             String mod = in.next();
             String inputNum2 = in.next();
 
@@ -21,11 +26,15 @@ public class Main {
             fullString = inputNum1 + mod + inputNum2;
             System.out.println("Вы ввели - " + fullString);
 
-            int answer = Calculator.calculateInTwoFormat(mod, inputNum1, inputNum2);
+            int answer = 0;
 
+            answer = Calculator.calculateInTwoFormat(mod, inputNum1, inputNum2);
             //Печатаем в нужном формате
             printInFormat(answer, isRoman);
-        } while (!fullString.equals("exit"));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
     }
 
     private static void printInFormat(int num, boolean isRomanFormat) {
